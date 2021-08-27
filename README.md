@@ -59,3 +59,42 @@ De esta foma se puede llamar directamente en el html y este se renderiza de menr
         <p> {{ message }} </p>
     </div>
 
+## Introduccion a eventos
+Primero es necesario definir metodos antes de poderlos llamar. Para esto, se crea unoa función dentro de la opción `methods` de la siguiente forma:
+
+    const app = Vue.createApp({
+        ... ,
+        methods: {
+            changeQuote() {
+                console.log('Hola mundo')
+            }
+        },
+        ...
+    })
+
+Para llamar a esos metodos desde un evento en el DOM se hace a traves de el prefijo `v-on:[evento]` y el nombre del metodo a llamar:
+    
+    <button v-on:click="changeQuote">
+        Change quote
+    </button>
+
+En caso de necesitar la información relacionada con el evento, este se podra enviar como argumento en su llamado 
+    
+    v-on:click="changeQuote( event )"
+
+Para llamar funciones o variables ya definidas se usa la palabra reservada `this` 
+
+    const app = Vue.createApp({
+        data() {
+            return {
+                message: 'Hola Mundo'
+            }
+        },
+        methods: {
+            changeQuote() {
+                console.log('Hola mundo')
+                this.message = 'Hola Vue'
+            }
+        }
+    })
+

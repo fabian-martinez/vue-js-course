@@ -3,6 +3,12 @@ const app = Vue.createApp({
         return {
             message: 'Hola Mundo'
         }
+    },
+    methods: {
+        changeQuote() {
+            console.log('Hola mundo')
+            this.message = 'Hola Vue'
+        }
     }
 })
 
