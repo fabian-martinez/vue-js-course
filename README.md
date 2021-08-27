@@ -98,3 +98,33 @@ Para llamar funciones o variables ya definidas se usa la palabra reservada `this
         }
     })
 
+## Directiva v-for
+Cuando se requiere la renderizaciòn de un arreglo de objetos, Vue nos permite usar la directiva `v-for`para esto toca tener definido el arreglo dentro del ***return*** de ***data()*** 
+
+    const quotes = [
+        { quote: 'The night is darkest just before the dawn. And I promise you, the dawn is coming.', author: 'Harvey Dent, The Dark Knight' }, ....
+    ]
+
+    const app = Vue.createApp({
+        data() {
+            return {
+                quotes
+            }
+        },
+    })
+
+Para su renderización dentro del DOM se hace de la siguiente forma:
+
+    <ul>
+        <li v-for="quote in quotes">author</li>
+    </ul>
+
+Para incluir el indice de los objetos del arreglo es necesario poner un parentesis e incluirlo como segundo indice `(objeto,indice)`
+
+###### Ejemplo:
+
+    <li v-for="({quote, author}, index) in quotes">
+        <span>{{index+1}} - {{quote}}</span>
+        <blockquote>- {{author}}</blockquote>
+    </li>
+

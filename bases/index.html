@@ -6,13 +6,12 @@
 </head>
 <body>
     <div id="myApp">
-        <h1>Batman quotes</h1>
-        <ul>
-            <li v-for="({quote, author}, index) in quotes">
-                <span>{{index+1}} - {{quote}}</span>
-                <blockquote>- {{author}}</blockquote>
-            </li>
-        </ul>
+        <h1> Hola mundo </h1>
+        <p> {{ message }} </p>
+
+        <button v-on:click="changeQuote">
+            Change quote
+        </button>
     </div>
 
     <script src="https://unpkg.com/vue@next"></script>
