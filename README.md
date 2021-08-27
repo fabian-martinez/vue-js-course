@@ -20,7 +20,7 @@ Para que esto se renderise en el html es necesario crear un div con el nombre de
 
     <div id="myApp"><div>
 
-# Representación declarativa
+## Representación declarativa
 Puedo incluir logica dentro del html si estoy dentro del div de vue. Para ello uso los `{{ js_logic }}`
     
     <div id="myApp">
@@ -31,4 +31,31 @@ Puedo incluir logica dentro del html si estoy dentro del div de vue. Para ello u
 ***NOTA:*** Tiene algunas limitaciones como el llamado a `if` o `while`. Se recimienda usar ternarios en caso de necesitar in `if` al renderizar.
 
 Lo que va en el template puede ponerse directamente en el html dentro del vid de vue y tambien recibe la representación declarativa
+
+## Estados del componente
+Para rederizar en tiempo real vue tiene diferentes estrategias. Para esto se pueden definir distintas opciones, a esta se le llama el ***optioApi***. Se declaran de lasiguiente manera:
+
+    const app = Vue.createApp({
+        methods: {},
+        watch:{}
+    })
+
+> Otra opción el usar el **compositionAPI** a tra ves del metodo `setup() {}`
+
+Para mantener el estado se puede utilizar la función `data()` que permite definit una variable reactiva. Esto se hace de la siguiente forma:
+
+    const app = Vue.createApp({
+        data() {
+            return {
+                message: 'Hola Mundo'
+            }
+        }
+    })
+
+De esta foma se puede llamar directamente en el html y este se renderiza de menra dinamica.
+
+    <div id="myApp">
+        <h1> Hola mundo </h1>
+        <p> {{ message }} </p>
+    </div>
 
