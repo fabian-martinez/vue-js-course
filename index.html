@@ -2,13 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Introducción a JavaScript</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="shortcut icon" href="assets/img/favicon.png">
+    <title>Vue.js Intro</title>
 </head>
 <body>
-    <script src="bundle.js"></script>
+    <div id="myApp">
+        <h1>Batman quotes <small>{{newQuote}}</small></h1>
+        <input 
+            type="text"
+            v-model="newQuote" 
+            v-on:keypress.enter="addQuote">
+
+        <hr>
+        
+        <ul>
+            <li v-for="({quote, author}, index) in quotes">
+                <span>{{index+1}} - {{quote}}</span>
+                <!-- <blockquote v-if="author">- {{author}}</blockquote> -->
+                <blockquote v-show="author">- {{author}}</blockquote>
+            </li>
+        </ul>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="app.js"></script>
 </body>
 </html>
