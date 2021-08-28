@@ -98,6 +98,15 @@ Para llamar funciones o variables ya definidas se usa la palabra reservada `this
         }
     })
 
+#### Modificadores de v-on
+
+Adicionalmente si se requiere algun tipo de conportamiento especial vue ya tiene definidos unos modificadores para acciones mas comunes. En el ejemplo a continucaión se utiliza el modificador `.enter` para que al precional la tecla **enter** se ejecute el metodo `addQuote`.
+
+        <input 
+            type="text"
+            v-model="newQuote" 
+            v-on:keypress.enter="addQuote">
+
 ## Directiva v-for
 Cuando se requiere la renderizaciòn de un arreglo de objetos, Vue nos permite usar la directiva `v-for`para esto toca tener definido el arreglo dentro del ***return*** de ***data()*** 
 
@@ -128,3 +137,26 @@ Para incluir el indice de los objetos del arreglo es necesario poner un parentes
         <blockquote>- {{author}}</blockquote>
     </li>
 
+## Directiva v-model
+La directiva `v-model`permite obtener datos del DOM y asignarlos a una variable reactiva. Primero se debe inicializar la variable reactiva dentro de data.
+
+    const app = Vue.createApp({
+        data() {
+            return {
+                ....,
+                newQuote:''
+            }
+        },
+    })
+
+En el ejemplo para llamarla definimos dentro objeto de tipo input la directiva de la siguiente manera.
+
+    <input type="text" v-model="newQuote">
+
+De esta forma el valor de la variable `newQuote`va a variar de manera reactiva.
+
+## Directivas v-if y v-show 
+Si quieremo modificar que elementos se en el dom tenemos dos opciones `v-if` o `v-show`. Ambas reciben como parametro una evaluación *true* o *false*. 
+En el caso de de `v-if`este no renderiza el objeto. Lo que quiere decir que no se puede visualizar en el html que se visualiza en la pagina. Por el contrario, el `v-show`oculta el objeto usando un ``style="display:none;"``. Adicionalmente el `v-if`es **lazyload** lo que significa que no evalua nada dentro del componente en caso de que sea falso.
+
+> **Nota:** Otra observaciòn es que no es permitido usar un `v-if`y un `v-for`para el mismo componente.

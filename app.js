@@ -11,9 +11,17 @@ const quotes = [
 const app = Vue.createApp({
     data() {
         return {
-            quotes
+            quotes,
+            newQuote:''
         }
     },
+    methods: {
+        addQuote() {
+            this.quotes.unshift({
+                    quote: this.newQuote
+                })
+        }
+    }
 })
 
 app.mount('#myApp')
