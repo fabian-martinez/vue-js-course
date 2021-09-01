@@ -1,19 +1,15 @@
 //TestSuit
-describe( 'Example Component', () => {
-  test( 'Debe ser mayor a 10', () => {
-    
-    // Arrage
-    let value = 5
+describe('Example Component', () => {
+    test('Debe ser mayor a 10', () => {
 
-    //Act
-    value = value + 2 
-    
-    //Assert
-    if( value > 10 ){
-      //TODO: todo bien
-    }else{
-      throw `${value} no es mayor a 10`
-    }
+        // Arrage
+        let value = 10
 
-  } )
-} )
+        //Act
+        value = value + 2
+
+        //Assert
+        expect(value).toBeGreaterThan(10)
+
+    })
+})

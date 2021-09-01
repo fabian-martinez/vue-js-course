@@ -39,3 +39,11 @@ Dentro del proyecto iniciamos con ***TestSuit*** que es un conjunto de pruebas q
 
         } )
     } )
+
+## Expect
+Expect es un conjunto de funciones que permiten hacer aserciones de manera sencilla y facil de leer para mas información se puede leer la documentción de [Jest](https://jestjs.io/docs/expect) (Framework utilizado para estas pruebas).
+
+###### Ejemplo:
+En este caso se va a validar que la variable `value` del elemplo anterior sea mayor a 10 utilizando los expect de la libreria de jest
+
+    expect(value).toBeGreaterThan(10)
