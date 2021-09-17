@@ -70,7 +70,26 @@ Expect es un conjunto de funciones que permiten hacer aserciones de manera senci
 En este caso se va a validar que la variable `value` del elemplo anterior sea mayor a 10 utilizando los expect de la libreria de jest
 
     expect(value).toBeGreaterThan(10)
-## Snapshot
-La idea del snapshot es que se tenga un snapshot de la aplicaciòn para evitar cambios
-###### shadownMount
-Monta solo los elementos minimos del componente
+## Snapshots
+La idea que se tenga un snapshot de la aplicación para evitar cambios no esperados del html del componente. Para ello lo primero es usar el `shadowMount` para montar el componente a probar. Luego se optiene un snapshot del html del componente mediante y se valida respecto al snapshot almacenado.
+    
+    const wrapper = shallowMount(Counter)
+    expect(wrapper.html()).toMatchSnapshot()
+**shadownMount(component)**: Es el encargado de monta el componente. Este metodo solo los elementos minimos del componente. Pertenece a la suit de vue para pruebas.
+
+Para crear el snapshot se corre la preba por primera vez. Esto toma el snapshot y lo almacena en una carpeta especial llamada *\_\_snapshots\_\_*
+###### Actualizar snapshop
+En caso que el snapshop se deba actualizar se corre el comando de pruebas `npm run test:unit` con la opción `-u`
+
+## Verificar etiquetas html
+Para segurarnos que no se asegurar que no se presente ningun cambio inesperado en el contenido html tambien podemos validar por buscando la etiqueta y validar su contendo. Esto se hace mediante el metodo `find('etiqueta')` esto puede incluir el nombre de la etiqueta (ejemplo: h2, button, p, etc.) o por id con el prefijo `#` o class con el prefijo `.`. Luego de optener el valor dentro de la etiqueta por medio de el metodo `text()`. Acontinuaciòn podemos ver una implementaciòn de ejemplo:
+
+    const wrapper = shallowMount(Counter)
+    const h2Value = wrapper.find('h2')
+    expect(h2Value.text()).toBe('Counter')
+
+Tambien podemos evaluar la existencia del component por medio del metodo `.exists()`. Acontinuación vemos una implementación
+
+    const wrapper = shallowMount(Counter)
+    expect(wrapper.find('h2').exists()).toBeTruthy()
+
