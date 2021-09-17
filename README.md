@@ -93,3 +93,14 @@ Tambien podemos evaluar la existencia del component por medio del metodo `.exist
     const wrapper = shallowMount(Counter)
     expect(wrapper.find('h2').exists()).toBeTruthy()
 
+## Find vs FindAll
+En caso de que existan varias etiquetas iguales se puede usar el metodo `findAll()` que rretorna un arreglo con todas las etiquetas que complen con el parametro de busqueda. Se puede ver asi:
+
+    const pTags = wrapper.findAll('p')
+    expect(pTags[1].text()).toEqual('100')
+
+El problema es que esta solucion puede ser muy sensible al cambio por tal razon se recomienda que se incluya un atributo en el componente y se evalue con base al atributo de la siguiente forma
+
+    <p data-testid="counter"> {{ counter }} </p>
+
+    

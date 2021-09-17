@@ -21,4 +21,13 @@ describe('Counter component testSuit', () => {
         expect(h2Value.text()).toBe('Counter')
 
     });
+
+    test('el valorpor defecto para la etiqueta p', () => {
+        const wrapper = shallowMount(Counter)
+        const pTag = wrapper.find('[data-testid="counter"]')
+
+        expect(pTag.text()).toEqual('100')
+
+
+    });
 });
