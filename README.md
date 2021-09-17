@@ -1,3 +1,26 @@
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Run your unit tests
+```
+npm run test:unit
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
+
 # Pruebas unitarias y de integración
 
 La estructura de una prueba unitario o de integración sigue el patron AAA, por sus siglas en ingles, *Arreglar (Arrange)*, *Actuar (Act)*, *Comprobar (Assert)*. Para el caso de vue se recomienda que la estructura de carpetas de las pruebas siga la misma estructura de carpetas del proyecto, ejemplo:
@@ -47,3 +70,7 @@ Expect es un conjunto de funciones que permiten hacer aserciones de manera senci
 En este caso se va a validar que la variable `value` del elemplo anterior sea mayor a 10 utilizando los expect de la libreria de jest
 
     expect(value).toBeGreaterThan(10)
+## Snapshot
+La idea del snapshot es que se tenga un snapshot de la aplicaciòn para evitar cambios
+###### shadownMount
+Monta solo los elementos minimos del componente
