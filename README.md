@@ -103,4 +103,6 @@ El problema es que esta solucion puede ser muy sensible al cambio por tal razon 
 
     <p data-testid="counter"> {{ counter }} </p>
 
-    
+    const pTag = wrapper.find('[data-testid="counter"]')
+    expect(pTag.text()).toEqual('100')
+
