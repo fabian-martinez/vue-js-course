@@ -19,5 +19,10 @@
         "@vue/test-utils": "^2.0.0-0",
         "typescript": "~3.9.3",
         "vue-jest": "^5.0.0-0"
+    },
+    "eslintConfig": {
+        "rules": {
+            "vue/no-multiple-template-root": "off"
+        }
     }
 }
