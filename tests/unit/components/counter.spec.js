@@ -30,4 +30,18 @@ describe('Counter component testSuit', () => {
 
 
     });
+
+    test('Debe incrementar y decrementar el valor del contador en 1', async() => {
+        const wrapper = shallowMount(Counter)
+        const counterBtns = wrapper.findAll('button')
+
+        await counterBtns[0].trigger('click')
+        await counterBtns[0].trigger('click')
+        await counterBtns[0].trigger('click')
+        await counterBtns[1].trigger('click')
+        await counterBtns[1].trigger('click')
+
+        const value = wrapper.find('[data-testid="counter"]').text()
+        expect(value).toBe('101')
+    });
 });

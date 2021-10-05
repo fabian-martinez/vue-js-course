@@ -106,3 +106,16 @@ El problema es que esta solucion puede ser muy sensible al cambio por tal razon 
     const pTag = wrapper.find('[data-testid="counter"]')
     expect(pTag.text()).toEqual('100')
 
+## Simular Eventos
+Simular acciones para verficar el correcto funcionamiento de la logica.
+Para simular eventos obtenemos el componente por medio de los metodos `find` o `findAll`. Luego se ejecuta el metodo `trigger` que resive el evento que se quiere realizar, finalmente se pone un `await` antes de llamar al evento. 
+
+> *Pecuerde que al tener un await la función deve se acincrono `async`*
+
+*Ejemplo:*
+
+    const wrapper = shallowMount(Counter)
+    const counterBtns = wrapper.findAll('button')
+
+    await counterBtns[0].trigger('click')
+
