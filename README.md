@@ -119,3 +119,12 @@ Para simular eventos obtenemos el componente por medio de los metodos `find` o `
 
     await counterBtns[0].trigger('click')
 
+## BeforesEach
+En el caso que se requiera ejecutar un mismo procedimiento para cada una de las pruebas se puede usar las palabras resevadas `beforeEach` y `afteEach` que ejecutan el codigo en su interior antes y despues de cada prueba respectivamente.
+
+*Ejemplo:*
+
+    beforeEach(() => {
+        wrapper = shallowMount(Counter)
+        //Monta el DOM del componente para cada prueba
+    });
