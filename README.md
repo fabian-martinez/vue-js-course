@@ -128,3 +128,12 @@ En el caso que se requiera ejecutar un mismo procedimiento para cada una de las 
         wrapper = shallowMount(Counter)
         //Monta el DOM del componente para cada prueba
     });
+
+## Enviar y evaluar props
+Para probar el comportamiento del componenete a partir de propiedades que se ingresa en la construcciòn de este. Se deben incluir al momento de montarlo (`mount` o `shalowMount`).
+
+    const wrapper = shallowMount(Counter, {
+        props: {
+            title: "Hola mundo"
+        }
+    })
