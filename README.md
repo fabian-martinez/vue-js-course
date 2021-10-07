@@ -137,3 +137,14 @@ Para probar el comportamiento del componenete a partir de propiedades que se ing
             title: "Hola mundo"
         }
     })
+
+## Spy y Mocks
+
+Los Spy son obsevvadores que estan pendientes de cambios en los metodos. Para esto se llama al metodo `spyOn` de la libreria `jest`y se define que objeto y que metodo de este son los que se estan espiando
+
+    clgSpy = jest.spyOn(console, 'log')
+
+Para llamarlo basta con incluirlo dentro de una acersiòn y validar si este metodo es llamado
+
+    expect(clgSpy).toHaveBeenCalled()
+
