@@ -16,10 +16,13 @@ describe('', () => {
     });
 
     test('no debe disparar getAnswer pero dispare el log', async() => {
+
+        const getAnswerSpy = jest.spyOn(wrapper.vm, 'getAnswer')
+
         const input = wrapper.find('input')
         await input.setValue('Hola Mundo')
         expect(clgSpy).toHaveBeenCalledTimes(1)
-            //TODO no se esta validando que se disparo de getAnswer
+        expect(getAnswerSpy).not.toHaveBeenCalled()
     });
 
     test('escribir el "?" debe fisparar el fetch', () => {

@@ -148,3 +148,6 @@ Para llamarlo basta con incluirlo dentro de una acersiòn y validar si este meto
 
     expect(clgSpy).toHaveBeenCalled()
 
+Para espiar los metodos definidos en la instacia del componente usamos la palabra reservada `vm` de las iguiente manera:
+
+    const getAnswerSpy = jest.spyOn(wrapper.vm, 'getAnswer')
