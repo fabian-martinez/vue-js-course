@@ -6,9 +6,12 @@ describe('', () => {
     let wrapper
     let clgSpy
 
+    global.fetch = jest.fn()
+
     beforeEach(() => {
         wrapper = shallowMount(Indecision)
         clgSpy = jest.spyOn(console, 'log')
+        jest.clearAllMocks()
     })
 
     test('debe hacer match con el Snapshot', () => {
@@ -17,17 +20,30 @@ describe('', () => {
 
     test('no debe disparar getAnswer pero dispare el log', async() => {
 
+        //Arrange
         const getAnswerSpy = jest.spyOn(wrapper.vm, 'getAnswer')
 
+        //Act
         const input = wrapper.find('input')
         await input.setValue('Hola Mundo')
+
+        //Assert
         expect(clgSpy).toHaveBeenCalledTimes(1)
         expect(getAnswerSpy).not.toHaveBeenCalled()
     });
 
-    test('escribir el "?" debe fisparar el fetch', () => {
-        //TODO
-        console.log("disparar fetch");
+    test('escribir el "?" debe fisparar el getAnswer e imprimir log', async() => {
+
+        //Arrange
+        const getAnswerSpy = jest.spyOn(wrapper.vm, 'getAnswer')
+
+        //Act
+        const input = wrapper.find('input')
+        await input.setValue('?')
+
+        //Assert
+        expect(clgSpy).toHaveBeenCalledTimes(1)
+        expect(getAnswerSpy).toHaveBeenCalledTimes(1)
     });
 
     test('prueba el getAnswer', () => {

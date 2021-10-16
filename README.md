@@ -151,3 +151,6 @@ Para llamarlo basta con incluirlo dentro de una acersiòn y validar si este meto
 Para espiar los metodos definidos en la instacia del componente usamos la palabra reservada `vm` de las iguiente manera:
 
     const getAnswerSpy = jest.spyOn(wrapper.vm, 'getAnswer')
+
+## Limpiar Mocks
+Cuando uno crea mocks estos pueden almacenar estados que afectan otras pruebas que usen el mock por consiguiente es necesario limpiar su estado par que no haya problema entre pruebas. Esto se hace con la operaciòn `jest.clearAllMocks()` En caso de que el mock este a nivel del set de pruebas se hace en el `beforeEach`
