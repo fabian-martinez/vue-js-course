@@ -154,3 +154,20 @@ Para espiar los metodos definidos en la instacia del componente usamos la palabr
 
 ## Limpiar Mocks
 Cuando uno crea mocks estos pueden almacenar estados que afectan otras pruebas que usen el mock por consiguiente es necesario limpiar su estado par que no haya problema entre pruebas. Esto se hace con la operaciòn `jest.clearAllMocks()` En caso de que el mock este a nivel del set de pruebas se hace en el `beforeEach`
+
+## Mock del Fetch
+Por defecto Vue no tiene implementado el Fetch por esta razon se puede presentar un mensaje de alerta en la ejeuciòn de pruebas. Para ejeutar pruebas en las que intervenga el fetch es necesario crear la funciòn a nivel del componente global del vue de la siguiente forma:
+
+    global.fetch = jest.fn(() => Promise.resolve({
+        json: () => Promise.resolve({
+            answer: 'yes',
+            forced: false,
+            image: 'https://yesno.wtf/assets/yes/2.gif'
+        })
+    }))
+
+En el ejemplo se puede ver que se implementa dos veces `Promise.resolve(){}` Esto se da por que el llamado al fetch hace un llamado doble es decir fetch es una promesa que espera la respuesta de otra promesa.
+
+Ya en la ejecuciòn de la prueba solo hace falta llamar a la funciòn y esta ya ejecuta la implementaciòn de pruebas de la misma.
+
+    wait wrapper.vm.getAnswer()

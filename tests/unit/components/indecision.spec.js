@@ -6,7 +6,13 @@ describe('', () => {
     let wrapper
     let clgSpy
 
-    global.fetch = jest.fn()
+    global.fetch = jest.fn(() => Promise.resolve({
+        json: () => Promise.resolve({
+            answer: 'yes',
+            forced: false,
+            image: 'https://yesno.wtf/assets/yes/2.gif'
+        })
+    }))
 
     beforeEach(() => {
         wrapper = shallowMount(Indecision)
@@ -46,9 +52,14 @@ describe('', () => {
         expect(getAnswerSpy).toHaveBeenCalledTimes(1)
     });
 
-    test('prueba el getAnswer', () => {
-        //TODO
-        console.log('Prueba el getAnswer');
+    test('prueba el getAnswer', async() => {
+
+        //Act
+        await wrapper.vm.getAnswer()
+
+        //Asset
+        expect(wrapper.vm.img).toBe('https://yesno.wtf/assets/yes/2.gif')
+        expect(wrapper.vm.answer).toBe('Si')
     });
 
     test('pruebas de getAnswer falle', () => {
