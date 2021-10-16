@@ -171,3 +171,9 @@ En el ejemplo se puede ver que se implementa dos veces `Promise.resolve(){}` Est
 Ya en la ejecuciòn de la prueba solo hace falta llamar a la funciòn y esta ya ejecuta la implementaciòn de pruebas de la misma.
 
     wait wrapper.vm.getAnswer()
+
+Para validar el llamado al fetch cuando este llamado falla se hace usando la operaciòn `fetch.mockImplementationOnce()` y se llama el `Promise.reject`:
+
+    fetch.mockImplementationOnce(() => Promise.reject('API is down'))
+
+Este codigo hace que cuando la aplicaciòn trate de llamar al fetch le responda un reject con el string que se ingres `'API is down'`

@@ -62,8 +62,17 @@ describe('', () => {
         expect(wrapper.vm.answer).toBe('Si')
     });
 
-    test('pruebas de getAnswer falle', () => {
-        //TODO
-        console.log('prueba que falla el answer');
+    test('pruebas de getAnswer falle', async() => {
+
+        //Arrange
+        fetch.mockImplementationOnce(() => Promise.reject('API is down'))
+
+        //Act
+        await wrapper.vm.getAnswer()
+
+        //Assert
+        const img = wrapper.find('img')
+        expect(img.exists()).toBeFalsy()
+        expect(wrapper.vm.answer).toBe('No se pudo cargar el API')
     });
 })
