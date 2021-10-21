@@ -26,23 +26,30 @@ export default {
     },
     methods: {
         async getAnswer(){
-            this.answer = 'Pensando...'
-            
-            const {answer, image} = await fetch('https://yesno.wtf/api/').then( result => result.json() )
-            
-            if(answer === 'yes'){
-                this.answer = 'Si'
-            }else if(answer === 'no'){
-                this.answer = 'No!!'
-            }else{
-                this.answer = 'Talvez'
+
+            try {
+                this.answer = 'Pensando...'
+                
+                const {answer, image} = await fetch('https://yesno.wtf/api/').then( result => result.json() )
+                
+                if(answer === 'yes'){
+                    this.answer = 'Si'
+                }else if(answer === 'no'){
+                    this.answer = 'No!!'
+                }else{
+                    this.answer = 'Talvez'
+                }
+                this.img = image
+            } catch (error) {
+                this.answer = 'No se pudo cargar el API'
+                this.img = null
             }
-            this.img = image
         }
     },
     watch: {
         question(value, oldValue){
             this.isValidQuestion = false
+            console.log(`Value::::: ${value}`);
             if ( !value.includes('?') ) return
             this.isValidQuestion = true
             this.getAnswer()
