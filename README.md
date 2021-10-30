@@ -30,4 +30,6 @@ El proyecto esta compuesto por dos componentes principale el `PokemonOptions` y 
 
 > Para este proyecto se va a utilizar el API `https://pokeapi.co/`
 
+## Componente PokemonPicture
 
+El componente `PokemonPicture` va a recibir dos parametro, el primer parametro es el id del pokemon y con este va a obtener la imagen del pokemon a partir de su id. el segundo parametro es una bandera que deacuerdo a si es `true` muestra el pokemon de lo contrario muestra la imagen oculta.
