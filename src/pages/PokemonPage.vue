@@ -7,6 +7,15 @@
 <script>
 import PokemonPicture from '@/components/PokemonPicture.vue'
 import PokemonOptions from '@/components/PokemonOptions.vue'
+
+import getPokemonOptions from '@/helpers/getPokemonPotions'
+
+getPokemonOptions().then((result) => {
+  console.table(result);
+}).catch((err) => {
+  console.log(err);
+});
+
 export default {
   components: { PokemonPicture, PokemonOptions },
 
