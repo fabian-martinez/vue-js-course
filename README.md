@@ -39,3 +39,7 @@ El componente `PokemonPicture` va a recibir dos parametro, el primer parametro e
 Para la generaciòn de las opciones de pokemon se creo un helper llamado `getPokemonOptions.js`. Compuesto de tres metodos, el metodo generara que orquesta la generaciòn de las opciones `getPokemonOptions` y dos metodos privados. El primer metodo `getPokemonsId` genera un array de ids del 1 al 650 que corresponde con los ids disponibles por el api `pokeapi.co`. El segundo metodo `getPokemonNames` obtiene el nombre de los pokemons apartir del id, esto lo hace mediante un llamado al API por medio de axios (se crea componente para llamado al api `api/pokemonApi.js`).
 
 `getPokemonOptions` genera 4 valores alatorios a partir del array obtenido en `getPokemonId` y con los ids usa el metodo `getPokemonsName` y de esta manera entrega el id que permite al componente `PokemonPicture` obtener la imagen y el nombre que son entregados al componente `PokemonOptions`.
+
+## Integrando PokemonOprions al componente
+
+En la pagina `PokemonPage` se hace el llamado al metodo `getPokemonOptions` que como se menciono anteriormente trae el registro de cuatro pokemons (id y nombre). Esto se hace desde el metodo reservado `mounted()` que ejecuta la operaciòn en el momento en el que vue monta el objeto. Luego le transfiere las opciones como parametros al componente. El componente `PojemonOptions` recibe los pokemon y por medio de `v-for` se asigna una opciòn a cada boton.
