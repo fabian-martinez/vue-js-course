@@ -46,4 +46,5 @@ En la pagina `PokemonPage` se hace el llamado al metodo `getPokemonOptions` que 
 
 ## Mostrando un pokemon de las opciones aleatoriamente
 
-Desde la pagina principal `PokemonPage` y a partir del array se obtiene uno de los 4 elementos de menera aleatoria y se le envia al componente `PokemonPicture` adicionalmente se define la bandera para visualizar u ocultar el pokemon. 
+Desde la pagina principal `PokemonPage` y a partir del array se obtiene uno de los 4 elementos de menera aleatoria y se le envia al componente `PokemonPicture` adicionalmente se define la bandera para visualizar u ocultar el pokemon y usando `v-if` y `v-else` evitamos que se muestre una imagen en blanco mientras se cargan los datos desde el API.
+
