@@ -40,6 +40,10 @@ Para la generaciòn de las opciones de pokemon se creo un helper llamado `getPok
 
 `getPokemonOptions` genera 4 valores alatorios a partir del array obtenido en `getPokemonId` y con los ids usa el metodo `getPokemonsName` y de esta manera entrega el id que permite al componente `PokemonPicture` obtener la imagen y el nombre que son entregados al componente `PokemonOptions`.
 
-## Integrando PokemonOprions al componente
+## Integrando PokemonOptions al componente
 
 En la pagina `PokemonPage` se hace el llamado al metodo `getPokemonOptions` que como se menciono anteriormente trae el registro de cuatro pokemons (id y nombre). Esto se hace desde el metodo reservado `mounted()` que ejecuta la operaciòn en el momento en el que vue monta el objeto. Luego le transfiere las opciones como parametros al componente. El componente `PojemonOptions` recibe los pokemon y por medio de `v-for` se asigna una opciòn a cada boton.
+
+## Mostrando un pokemon de las opciones aleatoriamente
+
+Desde la pagina principal `PokemonPage` y a partir del array se obtiene uno de los 4 elementos de menera aleatoria y se le envia al componente `PokemonPicture` adicionalmente se define la bandera para visualizar u ocultar el pokemon. 
