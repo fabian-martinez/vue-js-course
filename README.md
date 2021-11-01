@@ -75,3 +75,10 @@ En este caso PokemonPage va a ejecutar la operaciòn `getPokemonSelected` cuando
 Para la validaciòn de resultado se incluye un mensaje que se modifica de manera dinamica al ocurrier el evento `getAnswerd` al seleccionar una de las opciones adicional se creo un boton para riniciar el juego que inicializa todos los atributos del objeto.
 
 > **Nota:** El texto de resultado y el boton de inicializar se inclueron dentro de un elemento html de vue llamado `<template></template>` esto con el fin que en el rendirizado final no se vea pero que agrupe el los dos elementos agrupen el mismo compotamiento.
+
+## Subiendo Proyecto a netlify
+
+1. Construir el artefacto de producción con `npm run build`
+2. Inicia netlify en el navegador
+3. genera un nuevo sitio
+4. arrastrar la carpeta **dist** al espacio ofrecido por netflify
