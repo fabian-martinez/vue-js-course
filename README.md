@@ -1,3 +1,6 @@
+# pokemon-game
+
+Este proyecto consiste en un juego de adivinar el pokemon apartir de su imagen oculta en negro. Para ellos se se utiliza una api que me entrega esta información. El objetivo principal del juego es mostrar como se comunican los componentes de un proyecto ***Vue***.
 ## Project setup
 ```
 npm install
@@ -21,159 +24,61 @@ npm run test:unit
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-# Pruebas unitarias y de integración
+## Arquitectura del proyecto
 
-La estructura de una prueba unitario o de integración sigue el patron AAA, por sus siglas en ingles, *Arreglar (Arrange)*, *Actuar (Act)*, *Comprobar (Assert)*. Para el caso de vue se recomienda que la estructura de carpetas de las pruebas siga la misma estructura de carpetas del proyecto, ejemplo:
+El proyecto esta compuesto por dos componentes principale el `PokemonOptions` y el `PokenonPicture` el primero muestra diferentes nombres de pokemon para que el jugador seleccione cual corresponde con la imagen y el segundo compinente se encarga de mostrar la imagen oculta y luego desocultarla cuando el jugador hace click.
 
-    + src
-    |  |
-    |  +---components
-    |  |    |  component1.vue
-    |  \---pages
-    |       |  page1.vue
-    \ test
-       |
-       \---unit
-           |
-           +---components
-           |   | component1.spec.js
-           \---pages
-               | page1.spec.js
+> Para este proyecto se va a utilizar el API `https://pokeapi.co/`
 
-Dentro del proyecto iniciamos con ***TestSuit*** que es un conjunto de pruebas que certifican un componente en especifico, se define con la palabra reservas `describe` recibiendo dos parametros, el nombre de la prueba y una función que contiene todas las pruebas del ***TestSuit***. Dentro se llama a `test` que la descripción de la prueba un una función donde se ejecuta la prueba. Dentro se implementan los tres pasos de la prueba: `Arrange`, `Act`, `Assert`
+## Componente PokemonPicture
 
-###### Ejemplo:
+El componente `PokemonPicture` va a recibir dos parametro, el primer parametro es el id del pokemon y con este va a obtener la imagen del pokemon a partir de su id. el segundo parametro es una bandera que deacuerdo a si es `true` muestra el pokemon de lo contrario muestra la imagen oculta.
 
-    describe( 'Example Component', () => {
-        test( 'Debe ser mayor a 10', () => {
+## Generando PokemonOptions
 
-            // Arrange
-            let value = 5
+Para la generaciòn de las opciones de pokemon se creo un helper llamado `getPokemonOptions.js`. Compuesto de tres metodos, el metodo generara que orquesta la generaciòn de las opciones `getPokemonOptions` y dos metodos privados. El primer metodo `getPokemonsId` genera un array de ids del 1 al 650 que corresponde con los ids disponibles por el api `pokeapi.co`. El segundo metodo `getPokemonNames` obtiene el nombre de los pokemons apartir del id, esto lo hace mediante un llamado al API por medio de axios (se crea componente para llamado al api `api/pokemonApi.js`).
 
-            //Act
-            value = value + 2 
-        
-            //Assert
-            if( value > 10 ){
-                //TODO: todo bien
-            }else{
-                throw `${value} no es mayor a 10`
-                }
+`getPokemonOptions` genera 4 valores alatorios a partir del array obtenido en `getPokemonId` y con los ids usa el metodo `getPokemonsName` y de esta manera entrega el id que permite al componente `PokemonPicture` obtener la imagen y el nombre que son entregados al componente `PokemonOptions`.
 
-        } )
-    } )
+## Integrando PokemonOptions al componente
 
-## Expect
-Expect es un conjunto de funciones que permiten hacer aserciones de manera sencilla y facil de leer para mas información se puede leer la documentción de [Jest](https://jestjs.io/docs/expect) (Framework utilizado para estas pruebas).
+En la pagina `PokemonPage` se hace el llamado al metodo `getPokemonOptions` que como se menciono anteriormente trae el registro de cuatro pokemons (id y nombre). Esto se hace desde el metodo reservado `mounted()` que ejecuta la operaciòn en el momento en el que vue monta el objeto. Luego le transfiere las opciones como parametros al componente. El componente `PojemonOptions` recibe los pokemon y por medio de `v-for` se asigna una opciòn a cada boton.
 
-###### Ejemplo:
-En este caso se va a validar que la variable `value` del elemplo anterior sea mayor a 10 utilizando los expect de la libreria de jest
+## Mostrando un pokemon de las opciones aleatoriamente
 
-    expect(value).toBeGreaterThan(10)
-## Snapshots
-La idea que se tenga un snapshot de la aplicación para evitar cambios no esperados del html del componente. Para ello lo primero es usar el `shadowMount` para montar el componente a probar. Luego se optiene un snapshot del html del componente mediante y se valida respecto al snapshot almacenado.
-    
-    const wrapper = shallowMount(Counter)
-    expect(wrapper.html()).toMatchSnapshot()
-**shadownMount(component)**: Es el encargado de monta el componente. Este metodo solo los elementos minimos del componente. Pertenece a la suit de vue para pruebas.
+Desde la pagina principal `PokemonPage` y a partir del array se obtiene uno de los 4 elementos de menera aleatoria y se le envia al componente `PokemonPicture` adicionalmente se define la bandera para visualizar u ocultar el pokemon y usando `v-if` y `v-else` evitamos que se muestre una imagen en blanco mientras se cargan los datos desde el API.
 
-Para crear el snapshot se corre la preba por primera vez. Esto toma el snapshot y lo almacena en una carpeta especial llamada *\_\_snapshots\_\_*
-###### Actualizar snapshop
-En caso que el snapshop se deba actualizar se corre el comando de pruebas `npm run test:unit` con la opción `-u`
+## Informando al componente padre que el pokemon seleccionado
 
-## Verificar etiquetas html
-Para segurarnos que no se asegurar que no se presente ningun cambio inesperado en el contenido html tambien podemos validar por buscando la etiqueta y validar su contendo. Esto se hace mediante el metodo `find('etiqueta')` esto puede incluir el nombre de la etiqueta (ejemplo: h2, button, p, etc.) o por id con el prefijo `#` o class con el prefijo `.`. Luego de optener el valor dentro de la etiqueta por medio de el metodo `text()`. Acontinuaciòn podemos ver una implementaciòn de ejemplo:
+Al hacer click en alguna de las opciones de pokemon es necesario identificar cual fue sobre la que se hizo click para ello se usa el metodo reservado `$emit` esto se hace desde el componente hijo. Este metodo recibe dos valores, el primero es el nombre que se le quiere asignar al evento y el segundo es el valor que se quiere enviar cuando ocurre el evento:
 
-    const wrapper = shallowMount(Counter)
-    const h2Value = wrapper.find('h2')
-    expect(h2Value.text()).toBe('Counter')
+    <li v-for="pokemon in pokemons" 
+        :key="pokemon.id"
+        @click="$emit( 'pokemonSelected', pokemon.id )">
+        {{pokemon.name}}
+    </li>
 
-Tambien podemos evaluar la existencia del component por medio del metodo `.exists()`. Acontinuación vemos una implementación
+En este caso el evento es el click y se le va a llamar `pockemoSelected` y va a recibir el id del pokemon 
 
-    const wrapper = shallowMount(Counter)
-    expect(wrapper.find('h2').exists()).toBeTruthy()
+Para que el componente padre (el PokemonPage) lo lea se necesita definir como un evento del hijo y se asigna una operaciòn que ejecute la acciòn que necesita el padre cuando ocurre el evento en el hijo:
 
-## Find vs FindAll
-En caso de que existan varias etiquetas iguales se puede usar el metodo `findAll()` que rretorna un arreglo con todas las etiquetas que complen con el parametro de busqueda. Se puede ver asi:
+        <pokemon-options 
+        :pokemons="pokemonArr"
+        @pokemonSelected="getPokemonSelected"/>
 
-    const pTags = wrapper.findAll('p')
-    expect(pTags[1].text()).toEqual('100')
+En este caso PokemonPage va a ejecutar la operaciòn `getPokemonSelected` cuando ocurra el evento click del componente PokemonOptions. En el caso que el evento envie un valor como en el caso del `pokemon.id` este sera enviado a travez de la propiedad `$event` la cual por defecto es la primera que se envia (por eso no es necesario declararla en el metodo `getAnswed`)
 
-El problema es que esta solucion puede ser muy sensible al cambio por tal razon se recomienda que se incluya un atributo en el componente y se evalue con base al atributo de la siguiente forma
+        getPokemonSelected($event) // forma explicita de llamar a $event
 
-    <p data-testid="counter"> {{ counter }} </p>
+## Validaciòn de resultado
 
-    const pTag = wrapper.find('[data-testid="counter"]')
-    expect(pTag.text()).toEqual('100')
+Para la validaciòn de resultado se incluye un mensaje que se modifica de manera dinamica al ocurrier el evento `getAnswerd` al seleccionar una de las opciones adicional se creo un boton para riniciar el juego que inicializa todos los atributos del objeto.
 
-## Simular Eventos
-Simular acciones para verficar el correcto funcionamiento de la logica.
-Para simular eventos obtenemos el componente por medio de los metodos `find` o `findAll`. Luego se ejecuta el metodo `trigger` que resive el evento que se quiere realizar, finalmente se pone un `await` antes de llamar al evento. 
+> **Nota:** El texto de resultado y el boton de inicializar se inclueron dentro de un elemento html de vue llamado `<template></template>` esto con el fin que en el rendirizado final no se vea pero que agrupe el los dos elementos agrupen el mismo compotamiento.
 
-> *Pecuerde que al tener un await la función deve se acincrono `async`*
+## Subiendo Proyecto a netlify
 
-*Ejemplo:*
-
-    const wrapper = shallowMount(Counter)
-    const counterBtns = wrapper.findAll('button')
-
-    await counterBtns[0].trigger('click')
-
-## BeforesEach
-En el caso que se requiera ejecutar un mismo procedimiento para cada una de las pruebas se puede usar las palabras resevadas `beforeEach` y `afteEach` que ejecutan el codigo en su interior antes y despues de cada prueba respectivamente.
-
-*Ejemplo:*
-
-    beforeEach(() => {
-        wrapper = shallowMount(Counter)
-        //Monta el DOM del componente para cada prueba
-    });
-
-## Enviar y evaluar props
-Para probar el comportamiento del componenete a partir de propiedades que se ingresa en la construcciòn de este. Se deben incluir al momento de montarlo (`mount` o `shalowMount`).
-
-    const wrapper = shallowMount(Counter, {
-        props: {
-            title: "Hola mundo"
-        }
-    })
-
-## Spy y Mocks
-
-Los Spy son obsevvadores que estan pendientes de cambios en los metodos. Para esto se llama al metodo `spyOn` de la libreria `jest`y se define que objeto y que metodo de este son los que se estan espiando
-
-    clgSpy = jest.spyOn(console, 'log')
-
-Para llamarlo basta con incluirlo dentro de una acersiòn y validar si este metodo es llamado
-
-    expect(clgSpy).toHaveBeenCalled()
-
-Para espiar los metodos definidos en la instacia del componente usamos la palabra reservada `vm` de las iguiente manera:
-
-    const getAnswerSpy = jest.spyOn(wrapper.vm, 'getAnswer')
-
-## Limpiar Mocks
-Cuando uno crea mocks estos pueden almacenar estados que afectan otras pruebas que usen el mock por consiguiente es necesario limpiar su estado par que no haya problema entre pruebas. Esto se hace con la operaciòn `jest.clearAllMocks()` En caso de que el mock este a nivel del set de pruebas se hace en el `beforeEach`
-
-## Mock del Fetch
-Por defecto Vue no tiene implementado el Fetch por esta razon se puede presentar un mensaje de alerta en la ejeuciòn de pruebas. Para ejeutar pruebas en las que intervenga el fetch es necesario crear la funciòn a nivel del componente global del vue de la siguiente forma:
-
-    global.fetch = jest.fn(() => Promise.resolve({
-        json: () => Promise.resolve({
-            answer: 'yes',
-            forced: false,
-            image: 'https://yesno.wtf/assets/yes/2.gif'
-        })
-    }))
-
-En el ejemplo se puede ver que se implementa dos veces `Promise.resolve(){}` Esto se da por que el llamado al fetch hace un llamado doble es decir fetch es una promesa que espera la respuesta de otra promesa.
-
-Ya en la ejecuciòn de la prueba solo hace falta llamar a la funciòn y esta ya ejecuta la implementaciòn de pruebas de la misma.
-
-    wait wrapper.vm.getAnswer()
-
-Para validar el llamado al fetch cuando este llamado falla se hace usando la operaciòn `fetch.mockImplementationOnce()` y se llama el `Promise.reject`:
-
-    fetch.mockImplementationOnce(() => Promise.reject('API is down'))
-
-Este codigo hace que cuando la aplicaciòn trate de llamar al fetch le responda un reject con el string que se ingres `'API is down'`
+1. Construir el artefacto de producción con `npm run build`
+2. Inicia netlify en el navegador
+3. genera un nuevo sitio
+4. arrastrar la carpeta **dist** al espacio ofrecido por netflify
