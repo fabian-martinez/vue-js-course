@@ -48,3 +48,24 @@ En la pagina `PokemonPage` se hace el llamado al metodo `getPokemonOptions` que 
 
 Desde la pagina principal `PokemonPage` y a partir del array se obtiene uno de los 4 elementos de menera aleatoria y se le envia al componente `PokemonPicture` adicionalmente se define la bandera para visualizar u ocultar el pokemon y usando `v-if` y `v-else` evitamos que se muestre una imagen en blanco mientras se cargan los datos desde el API.
 
+## Informando al componente padre que el pokemon seleccionado
+
+Al hacer click en alguna de las opciones de pokemon es necesario identificar cual fue sobre la que se hizo click para ello se usa el metodo reservado `$emit` esto se hace desde el componente hijo. Este metodo recibe dos valores, el primero es el nombre que se le quiere asignar al evento y el segundo es el valor que se quiere enviar cuando ocurre el evento:
+
+    <li v-for="pokemon in pokemons" 
+        :key="pokemon.id"
+        @click="$emit( 'pokemonSelected', pokemon.id )">
+        {{pokemon.name}}
+    </li>
+
+En este caso el evento es el click y se le va a llamar `pockemoSelected` y va a recibir el id del pokemon 
+
+Para que el componente padre (el PokemonPage) lo lea se necesita definir como un evento del hijo y se asigna una operaciòn que ejecute la acciòn que necesita el padre cuando ocurre el evento en el hijo:
+
+        <pokemon-options 
+        :pokemons="pokemonArr"
+        @pokemonSelected="getPokemonSelected"/>
+
+En este caso PokemonPage va a ejecutar la operaciòn `getPokemonSelected` cuando ocurra el evento click del componente PokemonOptions. En el caso que el evento envie un valor como en el caso del `pokemon.id` este sera enviado a travez de la propiedad `$event` la cual por defecto es la primera que se envia (por eso no es necesario declararla en el metodo `getPokemonSeleted`)
+
+        getPokemonSelected($event) // forma explicita de llamar a $event
