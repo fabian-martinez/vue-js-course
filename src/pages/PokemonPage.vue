@@ -4,10 +4,14 @@
       <h1>¿Quien es este pokemon?</h1>
       <pokemon-picture 
         :pokemonId="pokemon.id" 
-        :showPokemon="showPokemon"/>
+        :showPokemon="showResult"/>
       <pokemon-options 
         :pokemons="pokemonArr"
-        @pokemonSelected="getPokemonSelected"/> <!-- igual a getPokemonSelected($event) donde event es el valor que envia $emit -->
+        @pokemonSelected="getAnswer"/>
+      <template v-if="showResult">
+        <h1 class="fade-in">{{result}}</h1>
+        <button @click="newGame">Iniciar de nuevo</button>
+      </template>
     </div>
 </template>
 
@@ -23,7 +27,8 @@ export default {
     return{
       pokemonArr: [],
       pokemon: null,
-      showPokemon: false
+      showResult: false,
+      result:''
     }
   },
   methods:{
@@ -32,8 +37,20 @@ export default {
       const rndInt = Math.floor( Math.random() * 4)
       this.pokemon = this.pokemonArr[rndInt]
     },
-    getPokemonSelected(selected){
-      this.showPokemon = true
+    getAnswer(idSelected){
+      this.showResult = true
+      if (idSelected === this.pokemon.id) {
+        this.result = `Correcto, ${this.pokemon.name}`
+      }else{
+        this.result = `Error, era ${this.pokemon.name}`
+      }
+    },
+    newGame(){
+      this.pokemonArr = []
+      this.showResult = false
+      this.pokemon = null
+      this.mixPokemonArr()
+
     }
   },
   mounted(){
