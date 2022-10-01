@@ -9,7 +9,7 @@
         :pokemons="pokemonArr"
         @pokemonSelected="getAnswer"/>
       <template v-if="showResult">
-        <h1 class="fade-in">{{result}}</h1>
+        <h2 class="fade-in">{{result}}</h2>
         <button @click="newGame">Iniciar de nuevo</button>
       </template>
     </div>
