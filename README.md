@@ -28,4 +28,24 @@ src/
 |   +-- router.js
 ```
 
- 
+ ### Ciclo de vida de Hooks 
+ [Ref](https://vuejs.org/guide/essentials/lifecycle.html)
+
+ 1. beforeCreate: Se usa cuando se reuiqre una validación antes de que se cree el componente 
+ 1. created: Se recomienda hacer peticiones http en esta etapa
+ 1. beforeMount
+ 1. mounted
+ 1. beforeUpdate
+ 1. updated
+ 1. activated
+ 1. deactivated
+ 1. beforeUnmount
+ 1. unmounted:  limpieza
+ 1. errorCaptured
+ 1. renderTracked
+ 1. renderTriggered
+
+ Donde hacer un llamado a un servicio
+
+ ### Layout
+ Componente que internamente tiene otro router-link similar al app.vue
