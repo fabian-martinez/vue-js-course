@@ -1,18 +1,16 @@
 <template>
-  <div>
-    <Navbar></Navbar>
-    <img alt="Vue logo" src="./assets/logo.png">
-    <router-view></router-view>
-  </div>
+  <img alt="Vue logo" src="./assets/logo.png">
+  <Counter></Counter>
 </template>
 
 <script>
-import { defineAsyncComponent } from "vue";
-
+import counter from './components/counter'
+import Counter from './components/counter.vue';
 export default {
   name: 'App',
   components: {
-    Navbar: defineAsyncComponent(() => import(/* webpackChunkName: "Navbar" */ "@/modules/shared/components/Navbar")),
+    counter,
+    Counter
 }
 }
 </script>

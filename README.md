@@ -1,51 +1,19 @@
-# rutas-ciclos
+# bases-vuex
 
-## Propuesta de como organizar las carpetas de un proyecto en vue
-
+## Project setup
 ```
-src/
-+-- modules/
-|   +-- moduleA/
-|   |   +-- componentes/
-|   |   +-- services/
-|   |   +-- helpers/
-|   |   +-- router/
-|   |   +-- store/
-|   +-- moduleB/
-|   +-- moduleC/
-
+npm install
 ```
 
-Intall vue router
+### Compiles and hot-reloads for development
 ```
-npm install vue-router@4
-```
-
-ubucacion del router de la aplicacion
-```
-src/
-+-- router/
-|   +-- router.js
+npm run serve
 ```
 
- ### Ciclo de vida de Hooks 
- [Ref](https://vuejs.org/guide/essentials/lifecycle.html)
+### Compiles and minifies for production
+```
+npm run build
+```
 
- 1. beforeCreate: Se usa cuando se reuiqre una validación antes de que se cree el componente 
- 1. created: Se recomienda hacer peticiones http en esta etapa
- 1. beforeMount
- 1. mounted
- 1. beforeUpdate
- 1. updated
- 1. activated
- 1. deactivated
- 1. beforeUnmount
- 1. unmounted:  limpieza
- 1. errorCaptured
- 1. renderTracked
- 1. renderTriggered
-
- Donde hacer un llamado a un servicio
-
- ### Layout
- Componente que internamente tiene otro router-link similar al app.vue
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
