@@ -1,0 +1,50 @@
+import { createStore } from 'vuex'
+import getRandomInt from '../helpers/getRandomInt'
+
+export default createStore({
+
+    state: {
+        count: 1,
+        lastMutation: "Last mutation",
+        isLoading: false,
+        lastValue: 0,
+    },
+
+    mutations: {
+        //Metodos para cambiar el state
+        //Mutastion son sincronas
+        increment( state ){
+            state.count++
+            state.lastMutation = 'increment'
+        },
+        incrementByAValue( state, value ){
+            state.count += value
+            state.lastMutation = `increment ${value}`
+            state.lastValue = value
+        },
+        setLoading( state, isLoading ){
+            state.isLoading = isLoading
+            state.lastMutation = 'is loading'
+        }
+    },
+
+    //las acciones son despachadas (dispatch) las mutation son confirmadas (commit)
+    //las acciones no afectan directamente el state
+    //las acciones llaman al commit
+    //se debe llamar al context
+    actions: {
+        async incrementRandom( { commit } ){
+            //commit( 'nutationName', parameterOfMutation )
+            commit( 'setLoading', true )
+            const randomInt = await getRandomInt()
+            commit( 'incrementByAValue', randomInt )
+            commit( 'setLoading', false )            
+        }
+    },
+    // getters: se comportan como las computed properties a nivel del modulo
+    getters: {
+        squareCount( state ){
+            return state.count * state.count
+        }
+    }
+})
