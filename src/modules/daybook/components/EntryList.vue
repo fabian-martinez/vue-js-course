@@ -7,6 +7,12 @@
                        placeholder="Buscar Entradas"
                        v-model="term">
             </div>
+            <div class="mt-2 d-flex flex-colum">
+                <button class="btn btn-primary mx-3"
+                @click="$router.push({ name: 'entry', params: { id: 'new' }})">
+                    <i class="fa fa-plus-circle"></i>
+                    Nuevas Entradas
+                </button></div>
             <div class="entry-scrollarea">
                 <entry v-for="entry in entriesByTerm" :key="entry.id" :entry="entry">Entry</entry>
             </div>
@@ -27,7 +33,7 @@ export default {
     },
     computed: {
         ...mapGetters( 'journal', ['getEntriesByTerm']  ),
-        entriesByTerm(){
+        entriesByTerm(){ 
            return this.getEntriesByTerm( this.term )
         }
     },
