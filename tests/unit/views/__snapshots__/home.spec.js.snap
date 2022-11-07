@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`About Page debe de hacer match con el snapshop cuando cargen el home 1`] = `
+<div class="home"><img alt="Vue logo" src="">
+  <h1>Hola Mundo</h1><button class="btn btn-primary">primary</button><button class="btn btn-secondary">secondary</button><button class="btn btn-success">success</button>
+</div>
+`;
+
+exports[`Pruebas en el Home view debe de hacer match con el snapshop cuando cargen el home 1`] = `
+<div class="home"><img alt="Vue logo" src="">
+  <h1>Hola Mundo</h1><button class="btn btn-primary">primary</button><button class="btn btn-secondary">secondary</button><button class="btn btn-success">success</button>
+</div>
+`;

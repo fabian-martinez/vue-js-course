@@ -7,7 +7,7 @@ export const updateEntry = (state, updatedEntry) => {
     state.entries[index] = updatedEntry
 }
 export const addEntry  = (state, newEntry) => {
-    state.entries = [ newEntry, ...state.entries]
+    state.entries = [ newEntry, ...state.entries ]
 }
 export const deleteEntry = (state, idEntry) => {
     // const index = state.entries.findIndex( entry => entry.id === idEntry)

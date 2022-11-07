@@ -8,13 +8,12 @@
         const formData = new FormData()
         formData.append('upload_preset','curso_vue' )
         formData.append('file',file )
-        const { data  } = await  cloudinaryApi.post('/image/upload', formData)
+        
+        const { data } = await  cloudinaryApi.post('/image/upload', formData)
 
-        console.log(data);
         return data.secure_url
     } catch (error) {
-        console.error('Error al cargar el archivo')
-        console.log(error);
+        console.error('Error al cargar el archivo', error)
         return null
     }
  }

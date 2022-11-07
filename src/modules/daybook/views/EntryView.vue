@@ -43,12 +43,14 @@
 <script>
 import { defineAsyncComponent } from '@vue/runtime-core';
 import { mapActions, mapGetters } from 'vuex'
-import getDayMonthYear from '@/modules/daybook/helpers/getDayMonthYear'
 import Swal from 'sweetalert2'
+
+import getDayMonthYear from '@/modules/daybook/helpers/getDayMonthYear'
 import uploadImages from '@/modules/daybook/helpers/uploadImages'
 
 
 export default {
+    name: 'EntryView',
     props:{
         id:{
             type: String,
@@ -124,7 +126,7 @@ export default {
                 confirmButtonText:'Si, estoy seguro'
             })
             if (!isConfirmed) return 
-            new Swal({
+            Swal.fire({
                 title: 'Espere porfavor',
                 allowOutsideClick:true
             })
