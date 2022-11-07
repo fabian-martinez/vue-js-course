@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`About Page debe de hacer match con el snapshop cuando cargen el about 1`] = `
+<div class="about">
+  <h1>This is an about page</h1>
+</div>
+`;
+
+exports[`Pruebas en el about view  debe de hacer match con el snapshop cuando cargen el about 1`] = `
+<div class="about">
+  <h1>This is an about page</h1>
+</div>
+`;
+
+exports[`Pruebas en el about view debe de hacer match con el snapshop cuando cargen el about 1`] = `
+<div class="about">
+  <h1>This is an about page</h1>
+</div>
+`;
