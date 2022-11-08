@@ -8,36 +8,14 @@
     </div>
 </template>
 <script>
-import { ref } from '@vue/reactivity'
+import useCounter from "@/composables/useCounter";
+
 export default {
-    // Propiedades que se mantienen para compisition API 
-    // Estas propiedades basicas para enteneder el funcionamiento del componente
     name:'counter',
-    props:{},
-    emits:[],
-    // setup() es el elemento centrar del composition API 
-    // Todo lo requerido para el funcionamiento del componente va dentro del setup()
-    // el setup se ejecuta antes de que se construya el componente
+    
     setup(){
-
-        const counter = ref(10) 
-
-        // Normalmente no se crea una funcion a menos de que se requiera dentro del setup
-        // const increase = () => {
-        //     counter.value++
-        // }
-        // const decrease = () => {
-        //     counter.value--
-        // }
-
-        return {
-            //Objects
-            counter,
-
-            //Methods
-            increase: () => counter.value++,
-            decrease: () => counter.value-- 
-        }
+        const { counter, increase, decrease } = useCounter(5)
+        return { counter, increase, decrease }
     }
 
     
