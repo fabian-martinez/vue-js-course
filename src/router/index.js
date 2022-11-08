@@ -1,7 +1,5 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-
-import daybookRouter from '../modules/daybook/router'
 
 const routes = [
   {
@@ -18,14 +16,29 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
-    // se llama al router del componente daybook
-    path: '/daybook',
-    ...daybookRouter
+    path: '/counter',
+    name: 'counter',
+    component: () => import(/* webpackChunkName: "counter" */ '../views/CounterView.vue')
+  },
+  {
+    path: '/users',
+    name: 'users',
+    component: () => import(/* webpackChunkName: "user" */ '../views/UsersView.vue')
+  },
+  {
+    path: '/pokemon-search',
+    name: 'pokemon-search',
+    component: () => import(/* webpackChunkName: "search-pokemon" */ '../views/SearchPokemonView.vue')
+  },
+  {
+    path: '/pokemon/:id',
+    name: 'pokemon-id',
+    component: () => import(/* webpackChunkName: "search-pokemon" */ '../views/PokemonView.vue')
   }
-] 
+]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHashHistory(),
   routes
 })
 
