@@ -12,26 +12,23 @@
             <li @dblclick="toggleTodo(id)" v-for="{id, text, completed} in getTodosByTab" :key="id" :class="{ 'competed':completed }"> {{text}}</li>
         </ul>
     </div>
-    <modal v-if="isOpen" @on:close="close" title="Este es un titulo">
-    <template v-slot:footer >
-      <button @click="close">Cancelar</button>
-      <button @click="onSubmit">Guardar</button>
-    </template>
-    <template v-slot:header>
-      <h2>Titulo</h2>
-    </template>
-    <template v-slot:body>
-        <form @submit.prevent="onSubmit">
-            <input 
-            type="text" 
-            name="text" 
-            placeholder="Tarea"
-            v-model="taskToCreate"
-            @submit.prevent="onSubmit"
-            ref="txtSearchID"
-            >
-        </form>
-    </template>
+    <modal v-if="isOpen" @on:close="close" >
+        <template v-slot:header>
+            <h2>Crear nueva tarea</h2>
+        </template>
+        <template v-slot:body>
+            <form @submit.prevent="onSubmit">
+                <input 
+                type="text" 
+                name="text" 
+                placeholder="Tarea"  
+                v-model="taskToCreate"
+                @submit.prevent="onSubmit"
+                >
+                <hr><hr>
+                <button type="submit">Crear tarea</button>
+            </form>
+        </template>
     <template v-slot:exposed="{newTitle}">
       <h2>{{newTitle}}</h2>
     </template> 
@@ -63,12 +60,11 @@ export default {
             taskToCreate,
             onSubmit: () => {
                 createTodo(taskToCreate.value)
-                taskToCreate.value = ''
+                taskToCreate.value=''
                 isOpen.value=false
             },
             open:() => {
                 isOpen.value=true
-                txtSearchID.value.select()
             },
             close:() => isOpen.value=false
         }
