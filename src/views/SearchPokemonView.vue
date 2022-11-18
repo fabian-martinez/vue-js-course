@@ -28,6 +28,7 @@ export default {
         const txtSearchID = ref()
 
         onActivated(() => {
+            console.log(txtSearchID.value);
             txtSearchID.value.select()
         })
 
