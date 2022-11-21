@@ -1,3 +1,3 @@
-// export const myGetters = () => {
+// export const myGetters = ( state ) => {
     // return state
 // }

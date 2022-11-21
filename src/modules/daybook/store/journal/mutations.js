@@ -14,3 +14,7 @@ export const deleteEntry = (state, idEntry) => {
     // state.entries.splice(index, 1)
     state.entries = state.entries.filter( entry => entry.id !== idEntry)
 }
+
+export const cleareEntries = (state) => {
+    state.entries = []
+}

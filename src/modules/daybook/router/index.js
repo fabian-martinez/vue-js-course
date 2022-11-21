@@ -1,5 +1,5 @@
 export default {
-    // todas las rjutas de daybook se registran aca
+    // todas las rutas de daybook se registran aca
     name: 'daybook',
     component: () => import(/* webpackChunkName: "daybook" */ '@/modules/daybook/layouts/DayBookLayout.vue'),
      children: [
@@ -11,7 +11,7 @@ export default {
          {
             path: ':id',
             name: 'entry',
-            component: () => import(/* webpackChunkName: "daybook-no-entry" */ '@/modules/daybook/views/EntryView.vue'),
+            component: () => import(/* webpackChunkName: "daybook-entry" */ '@/modules/daybook/views/EntryView.vue'),
             props: ( router ) => {
                return { id: router.params.id } 
             }
