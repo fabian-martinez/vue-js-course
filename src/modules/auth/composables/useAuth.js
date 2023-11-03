@@ -17,7 +17,7 @@ const useAuth = () => {
         return resp
     }
     
-    const checkAuthentication = async( user ) => {
+    const checkAuthentication = async( ) => {
         
         const resp = await store.dispatch('auth/checkAuthentication')
         return resp
@@ -32,7 +32,7 @@ const useAuth = () => {
     return{
         checkAuthentication,
         registerUser,
-        signInUser,
+        signInUser, 
         logout,
 
         authStatus: computed(() => store.getters['auth/currentState']),

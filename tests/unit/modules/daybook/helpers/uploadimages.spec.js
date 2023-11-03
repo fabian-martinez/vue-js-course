@@ -13,7 +13,7 @@ cloudinary.config({
 describe('Prueba el modulo de carga de archivos', () => {
     it('Debe cargar un archivo y retornar el url', async() => {
          
-        const {data} = await  axios.get('https://res.cloudinary.com/ddwvbyatp/image/upload/v1666547595/curso_vue/m867abnus3ece1d0l5y8.jpg',{
+        const {data} = await  axios.get('https://res.cloudinary.com/ddwvbyatp/image/upload/v1669765753/curso_vue/prcbovex3cmpb2b0nex9.jpg',{
              responseType: 'arraybuffer'
         })
 
@@ -27,5 +27,6 @@ describe('Prueba el modulo de carga de archivos', () => {
         const imageId = segment[segment.length - 1].replace('.jpg','')
         const deted = await cloudinary.v2.api.delete_resources(`curso_vue/${imageId}`)
         
-    });
+    },
+    30000); // Timeout to requests
 });

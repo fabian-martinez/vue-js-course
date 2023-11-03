@@ -84,6 +84,7 @@ export default {
             entry: null,
             localImage: null,
             file: null,
+            isUpdatedImage:false
         }
     },
     methods: {
@@ -105,17 +106,19 @@ export default {
         },
         async saveEntry() {
             new Swal({
-                title: 'Espere porfavor',
+                title: 'Espere por favor',
                 allowOutsideClick:true
             })
             Swal.showLoading()
-            this.entry.picture = await uploadImages(this.file)
+            if ( this.file ) this.entry.picture = await uploadImages( this.file )
             if ( this.entry.id ) {
                 this.updateEntry(this.entry)
             } else {
+                console.log("Creating Entry")
                 const id = await this.createEntry(this.entry)
                 this.$router.push({ name: 'entry', params:{ id }})
             }
+            this.isUpdatedImage = false
             Swal.fire('Guardado','Entrada registrada exitosamente','success')
         },
         async onDeleteEntry() {
@@ -151,6 +154,7 @@ export default {
             fr.readAsDataURL(file)  
         },
         onSelectImage(){
+            this.entry.picture = null
             this.$refs.imageSelector.click();
         }
     },

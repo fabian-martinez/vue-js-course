@@ -8,6 +8,7 @@
                      class="d-inline-block  aling-text-top mx-2">
                      {{username}}
             </a>
+            
             <div class="d-flex">
                 <div @click="onLogout" class="btn btn-outline-info mx-2">
                     <i class="fa fa-sign-out-alt"></i>
